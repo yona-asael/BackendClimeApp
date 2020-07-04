@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import User, { IUser } from '../models/users';
 import JWT from 'jsonwebtoken';
+import { model } from 'mongoose';
 
 
 export const signUp = async (req: Request, res: Response) => {
@@ -25,9 +26,8 @@ export const LogIn = async (req: Request, res: Response) => {
     res.status(200).header('auth-token', token).json(user);
 }
 
-export const profile = (req: Request, res: Response) => {
-    const user = User.findById(req.userId);
-    console.log(req.userId, 'user');
-    if (user) return res.status(404).json('No user found');
+export const profile = async (req: Request, res: Response) => {
+    const user = await User.findById(req.userId).exec();
+    if (!user) return res.status(404).json('No user found');
     res.status(200).json(user);
 }

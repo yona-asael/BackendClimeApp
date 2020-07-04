@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "tsc --watch",
     "start": "npm run build && node dist/server.js",
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon dist/server.js",
     "nodemon": "nodemon build/server.js"
   },
   "author": "ClimeDev",
