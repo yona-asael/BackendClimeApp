@@ -3,7 +3,7 @@ import Bycript from 'bcryptjs'
 
 //
 
-const schema = new Schema({
+const medic = new Schema({
 
     University: String,
     Grade: String,
@@ -17,3 +17,5 @@ export interface IMedic extends Document {
     CedP: String,
     person_id: String
 }
+
+export default model<IMedic>('Patient', medic);

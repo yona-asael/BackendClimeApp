@@ -3,7 +3,7 @@ import Bycript from 'bcryptjs'
 
 //
 
-const schema = new Schema({
+const recipe = new Schema({
 
     medic_id: String,
     pacient_id: String,
@@ -27,3 +27,5 @@ export interface IRecipe extends Document {
     T: String,
     dateExp: Date
 }
+
+export default model<IRecipe>('Patient', recipe);
