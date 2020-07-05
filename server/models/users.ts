@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, } from "mongoose";
 import Bycript from 'bcryptjs'
 
 //
@@ -6,11 +6,13 @@ import Bycript from 'bcryptjs'
 const schema = new Schema({
     username: String,
     password: String,
+    createdAt: { type: Date, default: Date.now },
 });
 
 export interface IUser extends Document {
     username: string,
     password: string,
+    createdAt: Date,
     encryptPassword(password: string): Promise<string>,
     validatePassword(password: string): Promise<boolean>
 }
