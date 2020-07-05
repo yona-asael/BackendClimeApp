@@ -1,6 +1,8 @@
 import { Schema, model, Document } from "mongoose";
 import Bycript from 'bcryptjs'
 
+//
+
 const schema = new Schema({
     username: String,
     password: String,
