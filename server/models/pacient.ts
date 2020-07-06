@@ -13,7 +13,7 @@ const patient = new Schema({
     cellphone: Number,
     NSS: String,
     SEX: String,
-    history: historyPat,
+    history: [historyPat],
 });
 
 export interface IHistory extends Document {
@@ -29,7 +29,7 @@ export interface IPatient extends Document {
     cellphone: number,
     NSS: string,
     SEX: string,
-    history: IHistory,
+    history: IHistory[],
 }
 
 export default model<IPatient>('Patient', patient);

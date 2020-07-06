@@ -28,4 +28,4 @@ export interface IRecipe extends Document {
     dateExp: Date
 }
 
-export default model<IRecipe>('Patient', recipe);
+export default model<IRecipe>('recipe', recipe);

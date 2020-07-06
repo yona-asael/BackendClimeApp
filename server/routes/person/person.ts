@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAll, getOne, create, update, delet, addRol, deleteRol } from '../../controllers/person.controller';
+import { getAll, getOne, create, update, delet, deleteRol } from '../../controllers/person.controller';
 const app: Router = Router();
 
 app.get('/', getAll);
@@ -12,9 +12,6 @@ app.put('/:id', update);
 
 app.delete('/:id', delet);
 
-app.post('/:id/Rols', addRol);
-
-app.delete('/:id/Rols/:idRol', deleteRol);
-
+app.delete('/:id/rols/:idRol', deleteRol);
 
 export { app };

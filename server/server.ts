@@ -20,7 +20,7 @@ mongoose.connect(`${process.env.URLDB}`, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
 }).then((resp: any) => {
     console.log('The Conection works');
 }).catch((err: any) => {

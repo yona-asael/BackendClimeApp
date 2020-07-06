@@ -1,7 +1,7 @@
 import { Schema, model, Document, } from "mongoose"
 
 const rols = new Schema({
-    name
+    name: String
 });
 
 const person = new Schema({
@@ -10,20 +10,20 @@ const person = new Schema({
     address: String,
     cellphone: String,
     job: String,
-    rol: rols
+    rol: [rols]
 });
 
-interface IRol extends Document {
+export interface IRol extends Document {
     name: string
 }
 
-interface IPerson extends Document {
+export interface IPerson extends Document {
     name: string,
     lastname: string,
     address: string,
     cellphone: string,
     job: string,
-    rol: IRol
+    rol: IRol[]
 }
 
 export default model<IPerson>('person', person);
