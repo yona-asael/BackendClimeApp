@@ -30,6 +30,9 @@ export const update = async (req: Request, res: Response) => {
         //Declarate new Patient And Old Patient
         let newPatient: IPatient = req.body;
         //Asignate new values to oldPatient
+        if(newPatient.validateSync()){
+            res.status(400).json("Error en los campos mostrados");
+        }
         res.status(204).json(await Patient.findByIdAndUpdate(req.params.id, newPatient));
     } catch (error) {
         res.status(500).json(error);

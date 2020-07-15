@@ -32,6 +32,9 @@ export const update = async (req: Request, res: Response) => {
         //Declare all variables of models and iterfaces used 
         let newMedic: IMedic = req.body;
         // Changue for new Properties
+        if(newMedic.validateSync()){
+            res.status(400).json("Error en los campos mostrados");
+        }
         res.status(204).json(await Medic.findByIdAndUpdate(req.params.id, newMedic));
     } catch (error) {
         res.status(500).json(error);

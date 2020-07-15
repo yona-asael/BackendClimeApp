@@ -17,7 +17,7 @@ routes.use('/auth', auth);
 routes.use('/medics', TokenValidation, medic);
 routes.use('/recipes', TokenValidation, recipe);
 routes.use('/persons', TokenValidation, person);
-routes.use('/pacient', TokenValidation, pacient);
+routes.use('/patients', TokenValidation, pacient);
 
 //Export
 export default routes;
