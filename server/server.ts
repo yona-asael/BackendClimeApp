@@ -2,6 +2,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 
 import routes from './routes/index';
 import './config/config';
@@ -11,6 +12,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw()); 
+app.use(cors())
 
 //rutas
 app.use('/api/v1', routes);

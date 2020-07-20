@@ -8,17 +8,21 @@ import { app as person } from './person/person';
 import { app as pacient } from './pacient/pacient';
 
 //Token Validation
-import { TokenValidation } from '../libs/verifyToken';
+import { } from '../libs/verifyToken';
 //Declarations
 const routes = express();
 
 //Route
 routes.use('/auth', auth);
-routes.use('/medics', TokenValidation, medic);
-routes.use('/recipes', TokenValidation, recipe);
-routes.use('/persons', TokenValidation, person);
-routes.use('/patients', TokenValidation, pacient);
+// routes.use('/medics',  medic);
+// routes.use('/recipes',  recipe);
+// routes.use('/persons',  person);
+// routes.use('/patients',  pacient);
 
+routes.use('/medics', medic);
+routes.use('/recipes', recipe);
+routes.use('/persons', person);
+routes.use('/patients', pacient);
 //Export
 export default routes;
 

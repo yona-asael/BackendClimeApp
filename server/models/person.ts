@@ -1,4 +1,6 @@
-import { Schema, model, Document, } from "mongoose"
+import { Schema, model, Document, PaginateModel } from "mongoose";
+import mongoose from "mongoose";
+import { mongoosePagination } from "ts-mongoose-pagination";
 
 const rols = new Schema({
     name: String
@@ -12,6 +14,7 @@ const person = new Schema({
     job: String,
     rol: [rols]
 });
+person.plugin(mongoosePagination);
 
 export interface IRol extends Document {
     name: string
@@ -26,4 +29,4 @@ export interface IPerson extends Document {
     rol: IRol[]
 }
 
-export default model<IPerson>('person', person);
+export const Person: PaginateModel<IPerson> = mongoose.model('person', person);

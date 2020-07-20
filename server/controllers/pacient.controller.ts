@@ -11,7 +11,7 @@ export const getAll = async (req: Request, res: Response) => {
 
 export const getOne = async (req: Request, res: Response) => {
     try {
-        res.status(200).json(Patient.findById(req.params.id));
+        res.status(200).json(await Patient.findById(req.params.id));
     } catch (error) {
         res.status(500).json(error);
     }

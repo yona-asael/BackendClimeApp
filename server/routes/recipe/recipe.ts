@@ -4,7 +4,7 @@ const app: Router = Router();
 
 app.get('/', getAll);
 
-app.post('/:id', getOne);
+app.get('/:id', getOne);
 
 app.post('/', create);
 

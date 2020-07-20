@@ -1,9 +1,15 @@
 import { Request, Response } from 'express';
-import Person, { IPerson } from '../models/person';
+import { Person, IPerson } from '../models/person';
 
 export const getAll = async (req: Request, res: Response) => {
     try {
-        res.status(200).json(await Person.find());
+        let limit = Number(req.query.limit);
+        let page = Number(req.query.page);
+        if (req.query.limit && req.query.page) {
+            res.status(200).json(await Person.paginate({}, { perPage: limit, page: page, }));
+        } else {
+            res.status(200).json(await Person.find());
+        }
     } catch (error) {
         res.status(500).json(error);
     }
@@ -11,7 +17,7 @@ export const getAll = async (req: Request, res: Response) => {
 
 export const getOne = async (req: Request, res: Response) => {
     try {
-        res.status(200).json(Person.findById(req.params.id));
+        res.status(200).json(await Person.findById(req.params.id));
     } catch (error) {
         res.status(500).json(error);
     }
@@ -30,7 +36,7 @@ export const update = async (req: Request, res: Response) => {
         //Declarate new Person And Old Person
         let newPerson: IPerson = req.body;
         //Asignate new values to oldPerson
-        if(newPerson.validateSync()){
+        if (newPerson.validateSync()) {
             res.status(400).json("Error en los campos mostrados");
         }
         res.status(204).json(await Person.findByIdAndUpdate(req.params.id, newPerson));
@@ -66,7 +72,7 @@ export const deleteRol = async (req: Request, res: Response) => {
         let newPerson: IPerson = await Person.findById(req.params.id);
         newPerson.rol = newPerson.rol.filter((rol) => rol._id != req.params.idRol);
         //Asignate new values to oldPerson
-        res.status(204).json(await Person.findByIdAndUpdate(req.params.id, newPerson));
+        res.status(202).json(await Person.findByIdAndUpdate(req.params.id, newPerson));
     } catch (error) {
         res.status(500).json(error);
     }
