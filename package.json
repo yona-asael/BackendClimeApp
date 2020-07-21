@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc --watch",
     "start": "npm run build && node dist/server.js",
-    "dev": "nodemon dist/server.js",
+    "dev": "concurrently \"tsc -w\" \"nodemon build/server.js\" ",
     "nodemon": "nodemon build/server.js"
   },
   "author": "ClimeDev",
@@ -29,6 +29,7 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.6",
     "@types/mongoose": "^5.7.29",
-    "@types/node": "^14.0.14"
+    "@types/node": "^14.0.14",
+    "concurrently": "^5.2.0"
   }
 }

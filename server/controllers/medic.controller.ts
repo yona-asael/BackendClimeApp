@@ -1,10 +1,15 @@
 import { Request, Response } from 'express';
-import Medic from '../models/medic';
-import { IMedic } from '../models/medic';
+import { Medic, IMedic } from '../models/medic';
 
-export const getAll = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response, next) => {
     try {
-        res.status(200).json(await Medic.find());
+        let limit = Number(req.query.limit);
+        let page = Number(req.query.page);
+        if (req.query.limit && req.query.page) {
+            res.status(200).json(await Medic.paginate({}, { perPage: limit, page: page, populate: { path: "person" } })) ;
+        } else {
+            res.status(200).json(await Medic.find().populate(['person']));
+        }
     } catch (error) {
         res.status(500).json(error);
     }
@@ -32,7 +37,7 @@ export const update = async (req: Request, res: Response) => {
         //Declare all variables of models and iterfaces used 
         let newMedic: IMedic = req.body;
         // Changue for new Properties
-        if(newMedic.validateSync()){
+        if (newMedic.validateSync()) {
             res.status(400).json("Error en los campos mostrados");
         }
         res.status(204).json(await Medic.findByIdAndUpdate(req.params.id, newMedic));

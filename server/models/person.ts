@@ -29,4 +29,4 @@ export interface IPerson extends Document {
     rol: IRol[]
 }
 
-export const Person: PaginateModel<IPerson> = mongoose.model('person', person);
+export const Person: PaginateModel<IPerson> = mongoose.model('Person', person);
