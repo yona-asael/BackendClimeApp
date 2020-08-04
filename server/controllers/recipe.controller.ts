@@ -30,10 +30,7 @@ export const update = async (req: Request, res: Response) => {
         //Declarate new Recipe And Old Recipe
         let newRecipe: IRecipe = req.body;
         //Asignate new values to oldRecipe
-        if(newRecipe.validateSync()){
-            res.status(400).json("Error en los campos mostrados");
-        }
-        res.status(204).json(await Recipe.findByIdAndUpdate(req.params.id, newRecipe));
+       res.status(204).json(await Recipe.findByIdAndUpdate(req.params.id, newRecipe));
     } catch (error) {
         res.status(500).json(error);
     }

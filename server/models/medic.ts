@@ -1,5 +1,5 @@
 import { Schema, model, Document, Types, PaginateModel } from "mongoose";
-import { IPerson } from './person';
+import {IPerson } from './person';
 import mongoose from "mongoose";
 import { mongoosePagination } from "ts-mongoose-pagination";
 
@@ -7,10 +7,10 @@ import { mongoosePagination } from "ts-mongoose-pagination";
 const medic = new Schema({
     university: String,
     grade: String,
-    cedP: String,
+    cedp: String,
     person: { type: Schema.Types.ObjectId, ref: 'Person', required: true },
 });
-medic.plugin(mongoosePagination);
+medic.plugin(mongoosePagination) ;
 
 export interface IMedic extends Document {
     university: String,
