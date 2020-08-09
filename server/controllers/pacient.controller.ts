@@ -15,6 +15,15 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
+export const addHistory = async (req: Request, res: Response) => {
+    try{
+        let person = await Patient.findByIdAndUpdate(req.params.id, {$push: req.body});
+        res.status(200).json(person);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 export const getOne = async (req: Request, res: Response) => {
   try {
     res.status(200).json(await Patient.findById(req.params.id));

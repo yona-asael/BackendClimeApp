@@ -53,7 +53,7 @@ export const addRol = async (req: Request, res: Response) => {
     try {
         //Declarate new Person
         let newPerson: IPerson = await Person.findById(req.params.id);
-        newPerson.rol.push(req.body);
+        //newPerson.rol.push(req.body);
         //Asignate new values to oldPerson
         res.status(204).json(await Person.findByIdAndUpdate(req.params.id, newPerson));
     } catch (error) {
@@ -66,7 +66,7 @@ export const deleteRol = async (req: Request, res: Response) => {
     try {
         //Declarate new Person
         let newPerson: IPerson = await Person.findById(req.params.id);
-        newPerson.rol = newPerson.rol.filter((rol) => rol._id != req.params.idRol);
+        //newPerson.rol = newPerson.rol.filter((rol) => rol._id != req.params.idRol);
         //Asignate new values to oldPerson
         res.status(202).json(await Person.findByIdAndUpdate(req.params.id, newPerson));
     } catch (error) {
