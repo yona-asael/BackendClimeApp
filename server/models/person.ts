@@ -1,4 +1,4 @@
-import { Schema, model, Document, PaginateModel } from "mongoose";
+import { Schema, model, Document, PaginateModel} from "mongoose";
 import mongoose from "mongoose";
 import { mongoosePagination } from "ts-mongoose-pagination";
 
@@ -12,7 +12,7 @@ const person = new Schema({
     address: String,
     cellphone: String,
     job: String,
-    rol: [rols]
+    rol: [rols],
 });
 person.plugin(mongoosePagination);
 

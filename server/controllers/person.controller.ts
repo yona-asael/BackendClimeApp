@@ -3,15 +3,12 @@ import { Person, IPerson } from '../models/person';
 
 export const getAll = async (req: Request, res: Response) => {
     try {
-        console.time('get all personas')
         let limit = Number(req.query.limit);
         let page = Number(req.query.page);
         if (req.query.limit && req.query.page) {
             res.status(200).json(await Person.paginate({}, { perPage: limit, page: page, }));
-            console.timeEnd('get all personas')
         } else {
             res.status(200).json(await Person.find());
-            console.timeEnd('get all personas')
         }
     } catch (error) {
         res.status(500).json(error);
@@ -28,9 +25,7 @@ export const getOne = async (req: Request, res: Response) => {
 
 export const create = async (req: Request, res: Response) => {
     try {
-        console.time('create persona');
         res.status(201).json(await new Person(req.body as IPerson).save());
-        console.timeEnd('create persona');
     } catch (error) {
         res.status(500).json(error);
     }

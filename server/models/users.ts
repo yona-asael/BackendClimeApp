@@ -1,17 +1,20 @@
-import { Schema, model, Document, } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
+import mongooseHidden from 'mongoose-hidden';
 import Bycript from 'bcryptjs'
 
 //
 
 const schema = new Schema({
-    username: String,
-    password: String,
+    username: {type: String, unique: true},
+    password: {type: String, hide:true },
+    person: String,
     createdAt: { type: Date, default: Date.now },
 });
-
+schema.plugin(mongooseHidden);
 export interface IUser extends Document {
     username: string,
     password: string,
+    person: string,
     createdAt: Date,
     encryptPassword(password: string): Promise<string>,
     validatePassword(password: string): Promise<boolean>

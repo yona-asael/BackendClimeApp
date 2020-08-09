@@ -4,7 +4,6 @@ import JWT from 'jsonwebtoken';
 
 
 export const signUp = async (req: Request, res: Response) => {
-    console.time('Registrar')
     //Get values
     let newUser: IUser = new User(req.body as IUser)
     //Create New User
@@ -12,12 +11,10 @@ export const signUp = async (req: Request, res: Response) => {
     const user = await newUser.save();
     //Token 
     const token: string = JWT.sign({ _id: `${user._id}` }, `${process.env.ACCESS_TOKEN_SECRET}`);
-    console.timeEnd('Registrar')
     res.status(200).header('auth-token', token).json(user);
 }
 
 export const LogIn = async (req: Request, res: Response) => {
-    console.time('Login');
     //Search user on database
     const user = await User.findOne({ username: req.body.username });
     //Validate User
@@ -28,9 +25,29 @@ export const LogIn = async (req: Request, res: Response) => {
     const token: string = JWT.sign({ _id: user._id }, `${process.env.ACCESS_TOKEN_SECRET}`, {
         expiresIn: 60 * 60 * 12
     });
-    console.timeEnd('Login');
     res.status(200).header('auth-token', token).json(user);
 }
+
+export const userExists = async (req: Request, res: Response) => {
+    try {
+    const user = await User.findOne({person: req.params.id});
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json();
+    }
+}
+
+export const userUpdate  = async (req: Request, res: Response) => {
+    try {
+        let user = await User.findOne({person: req.params.id});
+        user.password = await user.encryptPassword(req.body.password);
+        let updateduser = User.findByIdAndUpdate(user._id, user);
+        res.status(204).json(updateduser);
+    } catch(err){
+        res.status(500).json(err);
+    }
+}
+
 
 export const dates = async (req: Request, res: Response) => {
     let startdate =  new Date(req.params.start); 

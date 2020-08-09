@@ -3,7 +3,6 @@ import { Medic, IMedic } from '../models/medic';
 
 export const getAll = async (req: Request, res: Response, next) => {
     try {
-        console.time('medic')
         let limit = Number(req.query.limit);
         let page = Number(req.query.page);
         if (req.query.limit && req.query.page) {
