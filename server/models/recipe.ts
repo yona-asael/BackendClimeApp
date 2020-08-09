@@ -1,13 +1,6 @@
 import { Schema, model, Document } from "mongoose";
-import Bycript from 'bcryptjs'
-
-//
-
 const recipe = new Schema({
-
-    medic_id: String,
-    pacient_id: String,
-    date: Date,
+   date: Date,
     dignostic: String,
     TA: String,
     FC: String,
@@ -17,8 +10,6 @@ const recipe = new Schema({
 });
 
 export interface IRecipe extends Document {
-    medic_id: String,
-    pacient_id: String,
     date: Date,
     dignostic: String,
     TA: String,
