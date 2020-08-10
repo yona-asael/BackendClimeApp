@@ -1,13 +1,22 @@
 import { Request, Response } from 'express';
-import Recipe, { IRecipe } from '../models/recipe'
+import {Recipe, IRecipe } from '../models/recipe'
 
-export const getAll = async (req: Request, res: Response) => {
+export const getAll = async (req: Request, res: Response, next) => {
     try {
-        res.status(200).json(await Recipe.find());
+        console.time('recipe')
+        let limit = Number(req.query.limit);
+        let page = Number(req.query.page);
+        if (req.query.limit && req.query.page) {
+            //res.status(200).json(await Recipe.paginate({}, { perPage: limit, page: page, populate: { path: "person" } })) ;
+        } else {
+            res.status(200).json(await Recipe.find().populate(['recipe']));
+        }
     } catch (error) {
         res.status(500).json(error);
     }
 }
+
+
 
 export const getOne = async (req: Request, res: Response) => {
     try {
