@@ -9,7 +9,8 @@ const recipe = new Schema({
     FC: String,
     FR: String,
     T: String,
-    dateExp: Date
+    dateExp: Date,
+    status: {type: Boolean, default: false}
 });
 recipe.plugin(mongoosePagination) ;
 
@@ -20,7 +21,8 @@ export interface IRecipe extends Document {
     FC: String,
     FR: String,
     T: String,
-    dateExp: Date
+    dateExp: Date,
+    status: boolean
 }
 
 export const Recipe: PaginateModel<IRecipe> = mongoose.model('Recipe', recipe);

@@ -41,7 +41,7 @@ export const userUpdate  = async (req: Request, res: Response) => {
     try {
         let user = await User.findOne({person: req.params.id});
         user.password = await user.encryptPassword(req.body.password);
-        let updateduser = User.findByIdAndUpdate(user._id, user);
+        let updateduser = await User.findByIdAndUpdate(user._id, user);
         res.status(204).json(updateduser);
     } catch(err){
         res.status(500).json(err);
@@ -49,17 +49,9 @@ export const userUpdate  = async (req: Request, res: Response) => {
 }
 
 
-export const dates = async (req: Request, res: Response) => {
-    let startdate =  new Date(req.params.start); 
-    let enddate =  new Date(req.params.end);
-    let users = await User.find({createdAt:  {$lt: new Date(startdate.toISOString()), $gte: new Date(enddate.toISOString())}}) 
-    res.status(200).json(users);
-} 
-
-
 export const profile = async (req: Request, res: Response) => {
     // Search user profiled
     const user = await User.findById(req.userId).exec();
     if (!user) return res.status(404).json('No user found');
     res.status(200).json(user);
-}
+} 

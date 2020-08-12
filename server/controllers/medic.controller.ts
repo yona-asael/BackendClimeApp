@@ -34,8 +34,9 @@ export const create = async (req: Request, res: Response) => {
 export const update = async (req: Request, res: Response) => {
     try {
         //Declare all variables of models and iterfaces used 
-        let newMedic: IMedic = req.body;
-       res.status(204).json(await Medic.findByIdAndUpdate(req.params.id, newMedic));
+        let newMedic: IMedic = req.body as IMedic;
+       // console.log(newMedic);
+       res.status(204).json(await Medic.findByIdAndUpdate(req.params._id, newMedic));
     } catch (error) {
         res.status(500).json(error);
     }
