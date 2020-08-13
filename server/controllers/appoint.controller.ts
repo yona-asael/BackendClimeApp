@@ -1,12 +1,24 @@
 import { Request, Response } from 'express';
 import { Appoint, IApoint} from '../models/appointment';
+import {error} from 'console';
 
 export const getAll = async (req: Request, res: Response, next) => {
     try{
         let limit = Number(req.query.limit);
         let page = Number(req.query.page);
+        let sort = req.query.sort;
+        console.log(sort); 
         if (req.query.limit && req.query.page) {
-            res.status(200).json(await Appoint.paginate({status: false}, { perPage: limit, page: page, populate: [{ path: 'medic', populate: {path: 'person'}}, {path: 'patient'}] })) ;
+            res.status(200).json(            
+             await Appoint
+             .paginate(
+                 {status: false}, 
+                 { 
+                  perPage: limit, 
+                  page: page, 
+                  populate: [{ path: 'medic', populate: {path: 'person'}}, {path: 'patient'}] ,
+                  sort: {},
+                 }));
         } else {
             res.status(200).json(await Appoint.find().populate( [{ path: 'medic', populate: {path: 'person'}}, {path: 'patient'}] ));
         }
@@ -24,11 +36,12 @@ export const getOne = async (req: Request, res: Response) => {
 }
 
 export const create = async (req: Request, res: Response) => {
-    try {
-        res.status(201).json(await new Appoint(req.body as IApoint).save());
-    } catch (error) {
-        res.status(500).json(error);
-    }
+    new Appoint(req.body as IApoint).save((err, data)=>{
+        if(err){
+            res.status(500).json(error);
+        }
+        res.status(201).json(data);
+    });
 }
 
 export const update = async (req: Request, res: Response) => {

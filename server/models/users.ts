@@ -6,7 +6,7 @@ import Bycript from 'bcryptjs'
 
 const schema = new Schema({
     username: {type: String, unique: true},
-    password: {type: String, hide:true },
+    password: {type: String, hideJSON: true },
     person: String,
     createdAt: { type: Date, default: Date.now },
 });
