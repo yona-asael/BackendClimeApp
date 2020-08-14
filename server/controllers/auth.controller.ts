@@ -11,7 +11,7 @@ export const signUp = async (req: Request, res: Response) => {
     const user = await newUser.save();
     //Token 
     const token: string = JWT.sign({ _id: `${user._id}` }, `${process.env.ACCESS_TOKEN_SECRET}`);
-    res.status(200).header('auth-token', token).json(user);
+    res.status(200).header('auth-token', token).json({data:user, token: token});
 }
 
 export const LogIn = async (req: Request, res: Response) => {
@@ -25,7 +25,7 @@ export const LogIn = async (req: Request, res: Response) => {
     const token: string = JWT.sign({ _id: user._id }, `${process.env.ACCESS_TOKEN_SECRET}`, {
         expiresIn: 60 * 60 * 12
     });
-    res.status(200).header('auth-token', token).json(user);
+    res.status(200).header('auth-token', token).json({data: user, token: token});
 }
 
 export const userExists = async (req: Request, res: Response) => {

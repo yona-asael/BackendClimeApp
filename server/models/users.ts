@@ -6,8 +6,8 @@ import Bycript from 'bcryptjs'
 
 const schema = new Schema({
     username: {type: String, unique: true},
-    password: {type: String, hideJSON: true },
-    person: String,
+    password: {type: String, hide: true },
+    person: {type: String, required: [true, 'Se necesita alguien del personal para otorgale un usuario']},
     createdAt: { type: Date, default: Date.now },
 });
 schema.plugin(mongooseHidden);

@@ -5,12 +5,12 @@ import {IApoint} from "./appointment";
 
 const patient = new Schema({
     folio: String,
-    name: String,
-    lastname: String,
+    name: {type: String, required: [true, 'Se mecesota el nombre del paciente']},
+    lastname: {type: String, required: [true, 'Se requieren los apellidos del usuario']},
     Date: Date,
     address: String,
     cellphone: Number,
-    SEX: String,
+    SEX: {type: String, required: [true, 'Se necesita el sexo del paciente']},
     history: [{type: Schema.Types.ObjectId, ref: 'Appoint'}],
 });
 patient.plugin(mongoosePagination);

@@ -6,8 +6,6 @@ export const getAll = async (req: Request, res: Response, next) => {
     try{
         let limit = Number(req.query.limit);
         let page = Number(req.query.page);
-        let sort = req.query.sort;
-        console.log(sort); 
         if (req.query.limit && req.query.page) {
             res.status(200).json(            
              await Appoint
@@ -17,7 +15,6 @@ export const getAll = async (req: Request, res: Response, next) => {
                   perPage: limit, 
                   page: page, 
                   populate: [{ path: 'medic', populate: {path: 'person'}}, {path: 'patient'}] ,
-                  sort: {},
                  }));
         } else {
             res.status(200).json(await Appoint.find().populate( [{ path: 'medic', populate: {path: 'person'}}, {path: 'patient'}] ));

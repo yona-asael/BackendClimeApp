@@ -32,8 +32,9 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const update = async (req: Request, res: Response) => {
-    Medic.findByIdAndUpdate(req.params._id, req.body as IMedic)
-    .then((data)=>res.status(204).json(data))
+    let medic: IMedic = req.body;
+    Medic.findByIdAndUpdate(req.params.id, req.body as IMedic)
+    .then((data)=>res.status(204).json(data) )
     .catch(err => res.status(500).json(err));
 }
 

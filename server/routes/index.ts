@@ -9,21 +9,16 @@ import { app as pacient } from './pacient/pacient';
 import { app as appoint } from './Appoint/appoint';
 //Token Validation
 import { TokenValidation } from '../libs/verifyToken';
-//Declarations
+import {LogCreate} from '../libs/log';
 const routes = express();
 
 //Route
 routes.use('/auth', auth);
-// routes.use('/medics',TokenValidation,   medic);
-// routes.use('/recipes', TokenValidation,  recipe);
-// routes.use('/persons', TokenValidation,  person);
-// routes.use('/patients', TokenValidation,  pacient);
-// router.use('/appoints', TokenValidation, appoint);
-routes.use('/medics', medic);
-routes.use('/recipes', recipe);
-routes.use('/persons', person);
-routes.use('/patients', pacient);
-routes.use('/appoints', appoint);
+routes.use('/medics',[TokenValidation, LogCreate], medic);
+routes.use('/recipes',[TokenValidation, LogCreate], recipe);
+routes.use('/persons',[TokenValidation, LogCreate], person);
+routes.use('/patients',[TokenValidation, LogCreate], pacient);
+routes.use('/appoints',[TokenValidation, LogCreate], appoint);
 
 //Export
 export default routes;

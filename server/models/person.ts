@@ -4,11 +4,11 @@ import { mongoosePagination } from "ts-mongoose-pagination";
 
 
 const person = new Schema({
-    name: String,
-    lastname: String,
+    name: {type: String, required: [true, 'Se requiere el nombre del usuario']},
+    lastname: {type: String, required: [true, 'Se requiere apellidos del usuario']},
     address: String,
     cellphone: String,
-    job: String,
+    job: { type: String, required: [true, 'Se requiere que el personal tenga un trabajo']},
     rol: String,
 });
 person.plugin(mongoosePagination);

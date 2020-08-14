@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { getAll, getOne, create, update, delet } from '../../controllers/appoint.controller';
+
 const app: Router = Router();
 
-app.get('/', getAll);
+app.get('/' ,getAll);
 
 app.get('/:id', getOne);
 

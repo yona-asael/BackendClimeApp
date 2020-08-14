@@ -6,10 +6,10 @@ import { mongoosePagination } from "ts-mongoose-pagination";
 import {IRecipe} from "./recipe";
 
 const appoint = new Schema({
-    medic: {type: Schema.Types.ObjectId, ref: 'Medic'},
-    patient: {type: Schema.Types.ObjectId, ref: 'Patient'},
+    medic: {type: Schema.Types.ObjectId, ref: 'Medic', required: [true, 'Se requiere un medico']},
+    patient: {type: Schema.Types.ObjectId, ref: 'Patient', required: [true, 'Se requiere un paciente']},
     recipe: {type: Schema.Types.ObjectId, ref: 'recipe'},
-    status: Boolean,
+    status: {type: Boolean, default: false},
     date: Date,
     hour: String,
 });

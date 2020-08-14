@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 import { mongoosePagination } from "ts-mongoose-pagination";
 
 const recipe = new Schema({
-   date: Date,
-    dignostic: String,
+    date: {type: Date, default: Date.now},
+    dignostic: {type: String,required: [true, 'Se requiere minimo un diagnostico']},
     TA: String,
     FC: String,
     FR: String,
     T: String,
-    dateExp: Date,
+    dateExp: {type: Date, default: () => Date.now() + 10*24*60*60*1000},
     status: {type: Boolean, default: false}
 });
 recipe.plugin(mongoosePagination) ;
