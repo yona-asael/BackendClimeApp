@@ -15,8 +15,6 @@ export const getAll = async (req: Request, res: Response, next) => {
     }
 }
 
-
-
 export const getOne = async (req: Request, res: Response) => {
     try {
         res.status(200).json(await Recipe.findById(req.params.id));

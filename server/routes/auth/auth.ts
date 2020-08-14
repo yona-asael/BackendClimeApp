@@ -10,14 +10,9 @@ app.post('/login', VerifyUser ,LogIn);
 
 app.get('/profile', TokenValidation, profile);
 
-//app.get('/:id', TokenValidation ,userExists);
+app.get('/:id', TokenValidation ,userExists);
 
-//app.put('/:id', TokenValidation ,userUpdate)
-
-app.get('/:id' ,userExists);
-
-app.put('/:id' ,userUpdate)
-
+app.put('/:id', TokenValidation ,userUpdate)
 
 
 export { app };
